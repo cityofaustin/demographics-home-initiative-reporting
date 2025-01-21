@@ -107,8 +107,8 @@ home_data_export_csv <- st_drop_geometry(home_data_export)
 view(home_data_export)
 
 #Uncomment the lines below and run to export files as CSV, Shapefile, or GeoJSON
-#write_csv(home_data_export_csv, "data_csv/home_reporting_data_2023.csv")
-#st_write(home_data_export, "data_geo/home_reporting_data_2023.geojson")
+write_csv(home_data_export_csv, "data_csv/home_reporting_data_2023.csv")
+st_write(home_data_export, "data_geo/home_reporting_data_2023.geojson")
 #st_write(home_data_export, "data_shapefile/home_reporting_data_2023.shp")
 
 
