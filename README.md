@@ -1,13 +1,15 @@
 # HOME Initiative Demographic Data
 
-The City of Austin reports annually on a number of indicators relevant to the HOME Initiative. The Demographics and Data Division is responsible for providing up-to-date data at the census tract level for five demographic variables identified in the Uprooted report:
+This script loads and cleans demographic data used in the HOME Initiative annual report. The script produces data at the census tract level for five demographic variables identified as vulnerability indicators in the [Uprooted](https://sites.utexas.edu/gentrificationproject/austin-uprooted-report-maps/) report:
 
--   Indicator 1: Percent communities of color
+-   Percent communities of color
 
--   Indicator 2: Percent low income
+-   Percent low income
 
--   Indicator 3: Percent children living in poverty
+-   Percent children living in poverty
 
--   Indicator 4: Percent renters
+-   Percent renters
 
--   Indicator 5: Percent without a BA
+-   Percent without a BA
+
+More information can be found in [Appendix 3](https://sites.utexas.edu/gentrificationproject/files/2018/10/app3.pdf).
