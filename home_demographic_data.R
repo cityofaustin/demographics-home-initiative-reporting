@@ -12,19 +12,22 @@ library(tidyverse)
 library(sf)
 library(mapview)
 
+#The most recent year, or year of interest, from the American Community Survey
+acs_year <- 2024
+
 #Define the counties that overlap the COA boundary
 austin_counties <- c("Travis", "Hays", "Williamson")
 austin_msa_counties <- c("Travis", "Hays", "Williamson","Caldwell","Bastrop")
 
 #set the value for HUD Median Family Income (MFI)
-#https://www.huduser.gov/portal/datasets/il/il2023/2023summary.odn?year=2023&states=%24states%24&data=2023&inputname=METRO12420M12420*Austin-Round+Rock%2C+TX+MSA&stname=%24stname%24&statefp=99&selection_type=hmfa
-austin_mfi <- 122300 #2023 value
+#https://www.huduser.gov/portal/datasets/il/il2024/2024summary.odn?inputname=METRO12420M12420*Austin-Round+Rock%2C+TX+MSA&wherefrom=&selection_type=hmfa&year=2024
+austin_mfi <- 126000 #2024 value
 austin_mfi_80pct <- (austin_mfi*0.8) 
 
 #Set the list of census/ACS variables needed for the five vulnerability indicators listed at the top.
 #Indicators 3 and 4 can be pulled directly, while indicators 1, 2, and 5 require calculations as noted below.
 vulnerability_vars <- c(
-  pct_white = "DP05_0082P", #nonHispanic White alone
+  pct_white = "DP05_0096P", #nonHispanic White alone. Updated from DP05_0082P in 2023
   pct_in_poverty_under18 = "S1701_C03_002", #Indicator 3 % children living in poverty
   pct_renters = "DP04_0047P", # Indicator 4: % renters
   pop_over_25 = "S1501_C01_006",
@@ -49,14 +52,14 @@ vulnerability_vars <- c(
 austin_data <- get_acs(
   geography = "tract",
   variables = vulnerability_vars,
-  year = 2023,
+  year = acs_year,
   state = "TX",
   county = austin_msa_counties,
   geometry = TRUE,
   cb = FALSE,
   output = "wide"
-)|>
-  st_transform(2277) 
+)#|>
+ # st_transform(2277) 
 
 austin_data_clean <- austin_data |>
   #Indicator 1: Percent communities of color is calculated by subtracting the percent of the population that is non-Hispanic white alone from the population total (100%)
@@ -107,9 +110,9 @@ home_data_export_csv <- st_drop_geometry(home_data_export)
 view(home_data_export)
 
 #Uncomment the lines below and run to export files as CSV, Shapefile, or GeoJSON
-write_csv(home_data_export_csv, "data_csv/home_reporting_data_2023.csv")
-st_write(home_data_export, "data_geo/home_reporting_data_2023.geojson")
-#st_write(home_data_export, "data_shapefile/home_reporting_data_2023.shp")
+write_csv(home_data_export_csv, "data_csv/home_reporting_data_2024.csv")
+st_write(home_data_export, "data_geo/home_reporting_data_2024.geojson")
+#st_write(home_data_export, "data_shapefile/home_reporting_data_2024.shp")
 
 
 
